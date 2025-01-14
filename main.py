@@ -1,4 +1,4 @@
-def text_to_ascii_art(text):
+def text_to_ascii_art(text, save_to_file=False, file_name="ascii_art.txt"):
     ascii_art_dict = {
         'A': ["    /\\    ", "   /  \\   ", "  / /\\ \\  ", " / ____ \\ ", "/_/    \\_\\"],
         'B': [" ____  ", "| __ ) ", "|  _ \\ ", "| |_) |", "|____/ "],
@@ -28,26 +28,24 @@ def text_to_ascii_art(text):
         'Z': [" _____", "|__  /", "  / / ", " / /_ ", "/____|"],
     }
     
-    # Convert text to uppercase
     text = text.upper()
     
-    # Split text into individual characters
-    chars = [char for char in text]
-    
-    # Generate ASCII art
     art_lines = [""] * 5
-    for char in chars:
+    for char in text:
         if char in ascii_art_dict:
             for i in range(5):
                 art_lines[i] += ascii_art_dict[char][i] + "  "
         else:
             for i in range(5):
-                art_lines[i] += "     "  # Add spaces for unknown characters
+                art_lines[i] += "     "  
     
-    # Print ASCII art
     for line in art_lines:
         print(line)
+    
+    if save_to_file:
+        with open(file_name, "w") as file:
+            for line in art_lines:
+                file.write(line + "\n")
+        print(f"\nASCII art sauvegardé dans le fichier : {file_name}")
 
-# Example usage
-text_to_ascii_art("HELLO WORLD")
-
+text_to_ascii_art("HELLO WORLD", save_to_file=True)
