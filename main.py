@@ -1,3 +1,5 @@
+import re
+
 def text_to_ascii_art(text, save_to_file=False, file_name="ascii_art.txt"):
     ascii_art_dict = {
         'A': ["    /\\    ", "   /  \\   ", "  / /\\ \\  ", " / ____ \\ ", "/_/    \\_\\"],
@@ -28,6 +30,10 @@ def text_to_ascii_art(text, save_to_file=False, file_name="ascii_art.txt"):
         'Z': [" _____", "|__  /", "  / / ", " / /_ ", "/____|"],
     }
     
+    if not re.match("^[A-Za-z ]+$", text):
+        print("Erreur : Le texte contient des caractères non alphabétiques. Veuillez entrer uniquement des lettres.")
+        return
+
     text = text.upper()
     
     art_lines = [""] * 5
@@ -48,4 +54,5 @@ def text_to_ascii_art(text, save_to_file=False, file_name="ascii_art.txt"):
                 file.write(line + "\n")
         print(f"\nASCII art sauvegardé dans le fichier : {file_name}")
 
-text_to_ascii_art("HELLO WORLD", save_to_file=True)
+text_to_ascii_art("HELLO123", save_to_file=False)  
+text_to_ascii_art("HELLO WORLD", save_to_file=False)  
